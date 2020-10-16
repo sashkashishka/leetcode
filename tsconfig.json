@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "strictNullChecks": true,
+      "module": "esnext",
+      "target": "es6",
+      "allowJs": false,
+    },
+    "include": [
+      "./problems/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      ".yarn"
+    ]
+  }
