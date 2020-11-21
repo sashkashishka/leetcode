@@ -3,7 +3,7 @@
       "strictNullChecks": true,
       "module": "esnext",
       "target": "es6",
-      "allowJs": false,
+      "allowJs": false
     },
     "include": [
       "./problems/**/*.ts"
