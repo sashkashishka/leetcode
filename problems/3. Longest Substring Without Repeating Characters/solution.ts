@@ -1,16 +1,15 @@
-interface UniqueLetters {
+interface UniqueLettersSet {
   [key: string]: number;
 }
 
-const convertToInt = (o: UniqueLetters): number => {
+const convertToInt = (o: UniqueLettersSet): number => {
   return Object.keys(o).length;
 }
 
-// TODO use window sliding
 export function lengthOfLongestSubstring(s: string): number {
   let i = 0;
   let substrIdx = 0;
-  let substrings: UniqueLetters[] = [Object.create(null)];
+  let substrings: UniqueLettersSet[] = [Object.create(null)];
 
   while (i < s.length) {
     const subS = substrings[substrIdx];
@@ -40,4 +39,23 @@ export function lengthOfLongestSubstring(s: string): number {
       acc = Math.max(acc, curr);
       return acc;
     }, 0);
+}
+
+export function lengthOfLongestSubstring2(s: string): number {
+  let i = 0;
+  let j = 0;
+  const letterSet: UniqueLettersSet = Object.create(null);
+  let lengthOfSubstring = 0;
+
+  while (j < s.length) {
+    if (s[j] in letterSet) {
+      i = Math.max(letterSet[s[j]] + 1, i);
+    }
+
+    letterSet[s[j]] = j;
+    lengthOfSubstring = Math.max(lengthOfSubstring, j - i + 1);
+    j++;
+  }
+
+  return lengthOfSubstring;
 }
