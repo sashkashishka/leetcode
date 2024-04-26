@@ -1,15 +1,13 @@
 {
-    "compilerOptions": {
-      "strictNullChecks": true,
-      "module": "esnext",
-      "target": "es6",
-      "allowJs": false
-    },
-    "include": [
-      "./problems/**/*.ts"
-    ],
-    "exclude": [
-      "node_modules",
-      ".yarn"
-    ]
-  }
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "target": "es6",
+    "allowJs": false
+  },
+  "exclude": [
+    "node_modules",
+    ".yarn"
+  ]
+}

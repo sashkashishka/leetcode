@@ -1,5 +1,7 @@
-import { LRUCache } from './solution';
-import { LRUCache as LRUCacheLinkedList } from './solution2'
+import { describe, test } from 'node:test';
+import assert from 'node:assert/strict';
+import { LRUCache } from './lru-cache';
+import { LRUCache as LRUCacheLinkedList } from './lru-cache-2'
 
 describe('LRUCache', () => {
   test('LRUCache', () => {
@@ -20,7 +22,7 @@ describe('LRUCache', () => {
           break;
 
         case 'get':
-          expect(lfu.get(...args[i])).toBe(expectation[i]);
+          assert.equal(lfu.get(...args[i]), expectation[i]);
           break;
       }
     });
@@ -44,7 +46,7 @@ describe('LRUCache', () => {
           break;
 
         case 'get':
-          expect(lfu.get(...args[i])).toBe(expectation[i]);
+          assert.equal(lfu.get(...args[i]), expectation[i]);
           break;
       }
     });
@@ -68,7 +70,7 @@ describe('LRUCache', () => {
           break;
 
         case 'get':
-          expect(lfu.get(...args[i])).toBe(expectation[i]);
+          assert.equal(lfu.get(...args[i]), expectation[i]);
           break;
       }
     });
@@ -76,7 +78,7 @@ describe('LRUCache', () => {
 });
 
 describe('LRUCacheLinkedList', () => {
-  test.each([
+  const inputs = [
     [
       [[1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]] as const,
       [null, null, 1, null, -1, null, -1, 3, 4],
@@ -93,24 +95,29 @@ describe('LRUCacheLinkedList', () => {
       [null, null, null, null, -1, 3],
       2,
     ],
-  ])('%j', (args, expectation, size) => {
-    const lru = new LRUCacheLinkedList(size);
+  ];
 
-    args.map((a, i) => {
-      switch (a.length) {
-        case 2: {
-          const [key, val] = a;
-          lru.put(key, val);
-          break;
-        }
+  test('LRU', () => {
+    inputs.forEach((args, expectation, size) => {
+      const lru = new LRUCacheLinkedList(size);
 
-        case 1: {
-          const [key] = a;
-          expect(lru.get(key)).toBe(expectation[i]);
-          break;
+      args.map((a, i) => {
+        switch (a.length) {
+          case 2: {
+            const [key, val] = a;
+            lru.put(key, val);
+            break;
+          }
+
+          case 1: {
+            const [key] = a;
+            assert.equal(lru.get(key), expectation[i]);
+            break;
+          }
         }
-      }
-    });
+      });
+
+    })
   });
 
 })

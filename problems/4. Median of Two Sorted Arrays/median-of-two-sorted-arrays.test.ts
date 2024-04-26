@@ -1,4 +1,6 @@
-import { findMedianSortedArrays } from './solution';
+import { describe, test } from 'node:test';
+import assert from 'node:assert/strict';
+import { findMedianSortedArrays } from './median-of-two-sorted-arrays';
 
 // describe('removeDuplicates', () => {
 //   const inputs = [
@@ -35,17 +37,18 @@ describe('findMedianSortedArrays', () => {
     [[], [1], 1],
     [[2], [], 2],
     [
-      [1,1,1,1,1,1,1,1,1,1,4,4],
-      [1,3,4,4,4,4,4,4,4,4,4],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4],
+      [1, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4],
       3,
     ],
     [[1, 1], [1, 2], 1],
   ];
 
-  test.each(inputs)('%j', (n1, n2, result) => {
-    const output = findMedianSortedArrays(n1, n2);
-
-    expect(output).toBe(result);
+  test('median', () => {
+    inputs.forEach(([n1, n2, result]) => {
+      const output = findMedianSortedArrays(n1, n2);
+      assert.deepEqual(output, result);
+    })
   });
 });
 
